@@ -4,14 +4,13 @@ import os
 import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-
+CHROMEDRIVER_PATH = "Drivers/chromedriver.exe"
 # Set certificate errors
 options = webdriver.ChromeOptions()
 options.add_argument('--ignore-certificate-errors-spki-list')
 options.add_argument('--ignore-ssl-errors')
-
 # Start chrome
-driver = webdriver.Chrome(chrome_options=options)
+driver = webdriver.Chrome("Drivers/chromedriver.exe", chrome_options=options)
 
 #open website
 driver.get("http://www.python.org")
