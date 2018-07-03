@@ -4,6 +4,7 @@ import os
 import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import Select
 CHROMEDRIVER_PATH = "Drivers/chromedriver.exe"
 # Set certificate errors
 options = webdriver.ChromeOptions()
@@ -13,14 +14,25 @@ options.add_argument('--ignore-ssl-errors')
 driver = webdriver.Chrome("Drivers/chromedriver.exe", chrome_options=options)
 
 #open website
-driver.get("http://www.python.org")
-time.sleep(4)
-assert "Python" in driver.title
+driver.get("https://www.cox.com/residential")
 time.sleep(3)
-elem = driver.find_element_by_name("q")
-elem.send_keys("pycon")
+assert "Cox" in driver.title
+
+#open drop down and sign in
+driver.find_element_by_id("pf-signin-trigger").click()
+print('flag 1')
+elem = driver.find_element_by_id("pf-password")
+time.sleep(1)
+elem.send_keys("password")
+print('flag 2')
+elem = driver.find_element_by_id("pf-username")
+time.sleep(1)
+elem.send_keys("jmiceter1")
 #elem.submit()
 elem.send_keys(Keys.RETURN)
-assert "No results found." not in driver.page_source
-driver.close()
+assert "No results found." not in driver.page_source 
+
+#open drop down and sign in
+driver.get("https://www.cox.com/ibill/make-payment.cox")
+#driver.close()
 print ("Get scraping and live the life")
